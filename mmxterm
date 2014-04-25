@@ -1,0 +1,61 @@
+#!/bin/sh -f
+# Create an xterm of appropriate colorfulness and fontness.
+
+tinyfont=6x13
+smallfont=7x13
+largefont=9x15
+greatfont=10x20
+
+# Default is small green.
+bg='#005000'
+fg=white
+cr=pink
+fn=$smallfont
+
+for arg in $* ; do
+  case $arg in
+  t|-t)
+    fn=$tinyfont
+    ;;
+  s|-s)
+    fn=$smallfont
+    ;;
+  l|-l)
+    fn=$largefont
+    ;;
+  g|-g)
+    fn=$greatfont
+    ;;
+  bk|black)
+    bg=black
+    ;;
+  bl|blue)
+    bg=navy
+    ;;
+  ch|chocolate|br|brown)
+    bg='#402020'
+    cr=yellow
+    ;;
+  gr|green)
+    bg='#005000'
+    ;;
+  mr|maroon)
+    bg='#501030'
+    cr=green
+    ;;
+  pr|purple)
+    bg='#400070'
+    cr=yellow
+    ;;
+  nv|navy)
+    bg='#000040'
+    ;;
+  sl|slate)
+    bg='#405040'
+    cr=green
+    ;;
+  *) ;;
+  esac
+done
+
+xterm -fn $fn -bg $bg -fg $fg -cr $cr -sb -g 80x40 &

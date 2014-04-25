@@ -1,0 +1,29 @@
+#!/bin/bash
+# Shim for the "Java decoder" tool
+#
+
+# Hmm: how to safely pass to the program "all the args pass to us"
+# and have them still be properly escape-quoted?
+# This works when the command line arg has to be ''-quoted due to special chars
+# but failes for multiple arguments (bundles them into one arg)
+# java $JAVAPATH com.myke.examples.tools.InputDecoder "$*"
+#
+# This one passes multi args ok but if they need to be quoted at all it fails
+# java $JAVAPATH com.myke.examples.tools.InputDecoder $*
+#
+# I guess we just have to loop here in the script for now.
+
+JAVAPATH="-cp /Users/myke/Documents/code/java"
+
+argnum=1
+while [ $# -ge 1 ] ; do
+    if ((argnum > 1)) ; then
+       echo ""
+    fi
+    echo "[32;1mArgument $argnum: ------------------------------------------[0m"
+    java $JAVAPATH com.myke.examples.tools.InputDecoder "$1"
+    ((argnum++))
+    shift
+done
+
+

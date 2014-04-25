@@ -1,0 +1,41 @@
+#!/bin/bash
+# Collect and display some basic metrics from a node JS git repo
+
+if [ $# -lt 1 ] ;
+then
+    echo "Usage: `basename $0` <dir1> [dir2 ...]"
+    exit
+fi
+
+while [ $# -ge 1 ] ; 
+do
+    if [ ! -d $1 ] ;
+    then
+	echo "<$1> not a directory"
+	shift
+	continue
+    fi
+
+    echo "[36;1m--------------- JS Metrics for [$1] ---------------[0m"
+    pushd $1 > /dev/null
+
+    echo "[32;1mJS Test Metrics[0m"
+    for test in `echo "describe it( data_driven("` ;
+    do
+	echo "Total tests from '$test'"
+	find test -name '*.js' -exec grep -h "$test" {} \; | wc -l
+    done
+
+    echo "[32;1mJS Code Metrics[0m"
+    for dir in `find . -name 'node_modules' -prune -o -name '.git' -prune -o -name '.nyc_output' -prune -o -name 'coverage' -prune -o -name 'logs' -prune -o -name '.build' -prune -o \( -type d -maxdepth 1 -print \)` ;
+    do
+	if [ "$dir" = "." ] ; then
+	    continue;
+	fi
+	echo -n $dir
+	find $dir -path './public/components' -prune -o \( -name '*.js' -exec wc -l {} \; \) | awk '{sum+= $1;}END{print " = " sum " lines";}'
+    done
+
+    popd > /dev/null
+    shift
+done

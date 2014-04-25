@@ -1,0 +1,327 @@
+#!/bin/sh -f
+# $Id: mmxload,v 1.3 2007/10/31 17:20:55 mimorgan Exp $
+#
+# Fancy xloads for all the dev machines.
+# Maybe make a fancy thing to kill them all too?
+#
+
+if [ $# -lt 1 ] ; then
+    echo "Usage: `basename $0` { hype, toad, sjnpg03, sjnpg11, hyper[1-14], all }"
+    echo "       Any number of target machines may be given, or \"all\""
+    exit 1
+fi
+
+# Try to auto-detect the current display
+display="-display `hostname`$DISPLAY"
+
+# Colorfullness
+colors1="-hl \"#C00030\" -fg \"#800040\" -bg \"#500050\""
+colors2="-hl \"#00C030\" -fg \"#008020\" -bg \"#006010\""
+colors3="-hl \"#B04040\" -fg \"#903030\" -bg \"#502020\""
+colors4="-hl \"#3000C0\" -fg \"#200080\" -bg \"#100060\""
+
+colors5="-hl \"#C00050\" -fg \"#600060\" -bg \"#300070\""
+colors6="-hl \"#00C050\" -fg \"#006040\" -bg \"#008030\""
+colors7="-hl \"#B06060\" -fg \"#705050\" -bg \"#502040\""
+colors8="-hl \"#5000C0\" -fg \"#500090\" -bg \"#300040\""
+
+colors9="-hl \"#A02030\" -fg \"#802060\" -bg \"#502040\""
+colors10="-hl \"#20A040\" -fg \"#002000\" -bg \"#307050\""
+
+colorsToad="-bg \"#505080\" -fg \"#707090\" -hl \"#303030\""
+colorsPg03="-bg \"#707090\" -fg \"#505080\" -hl \"#303030\""
+colorsPg11="-bg \"#707090\" -fg \"#505080\" -hl \"#303030\""
+
+colors11="-bg \"#101010\" -fg \"#604040\" -hl \"#508080\""
+colors12="-bg \"#604040\" -fg \"#101010\" -hl \"#508080\""
+colors13="-bg \"#101010\" -fg \"#604040\" -hl \"#508080\""
+colors14="-bg \"#604040\" -fg \"#101010\" -hl \"#508080\""
+
+colors24="-hl \"#B06060\" -fg \"#705050\" -bg \"#502040\""
+
+xloadArgs="-fn 6x12 -update 2 -scale 2 $display > /dev/null"
+
+# Where to run an xload
+doToad=0
+doPg03=0
+doPg11=0
+doHyper1=0
+doHyper2=0
+doHyper3=0
+doHyper4=0
+#doHyper5=0
+doHyper6=0
+doHyper7=0
+doHyper8=0
+#doHyper9=0
+doHyper10=0
+doHyper11=0
+doHyper12=0
+doHyper13=0
+doHyper14=0
+doHyper24=0
+
+##########################################
+# Determine xload sizing and locations
+##########################################
+
+# xload size
+#size=100x100
+#size=100x85
+size=100x58
+xpos=-1
+
+locToad=0
+locPg11=1
+locPg03=2
+locHyper1=3
+locHyper2=4
+locHyper3=5
+locHyper4=6
+locHyper6=7
+locHyper7=8
+locHyper8=9
+locHyper10=10
+locHyper11=11
+locHyper12=12
+locHyper13=13
+locHyper14=14
+locHyper24=15
+
+#locHyper5=6
+#locHyper9=10
+
+# Position to clear the xclock
+yinitial=115
+
+# Spacing between each xload.
+#yposfactor=115
+#yposfactor=100
+yposfactor=70
+
+yToad=`expr -$yinitial - $yposfactor \* $locToad`
+yPg03=`expr -$yinitial - $yposfactor \* $locPg03`
+yPg11=`expr -$yinitial - $yposfactor \* $locPg11`
+yHyper1=`expr -$yinitial - $yposfactor \* $locHyper1`
+yHyper2=`expr -$yinitial - $yposfactor \* $locHyper2`
+yHyper3=`expr -$yinitial - $yposfactor \* $locHyper3`
+yHyper4=`expr -$yinitial - $yposfactor \* $locHyper4`
+#yHyper5=`expr -$yinitial - $yposfactor \* $locHyper5`
+yHyper6=`expr -$yinitial - $yposfactor \* $locHyper6`
+yHyper7=`expr -$yinitial - $yposfactor \* $locHyper7`
+yHyper8=`expr -$yinitial - $yposfactor \* $locHyper8`
+#yHyper9=`expr -$yinitial - $yposfactor \* $locHyper9`
+yHyper10=`expr -$yinitial - $yposfactor \* $locHyper10`
+yHyper11=`expr -$yinitial - $yposfactor \* $locHyper11`
+yHyper12=`expr -$yinitial - $yposfactor \* $locHyper12`
+yHyper13=`expr -$yinitial - $yposfactor \* $locHyper13`
+yHyper14=`expr -$yinitial - $yposfactor \* $locHyper14`
+yHyper24=`expr -$yinitial - $yposfactor \* $locHyper24`
+
+
+# Determine which xloads to launch...
+for arg in $* ; do
+  case $arg in 
+  *pg03)
+    doPg03=1
+    ;;
+  *pg11)
+    doPg11=1
+    ;;
+  toad)
+    doToad=1
+    ;;
+  hyper1)
+    doHyper1=1
+    ;;
+  hyper2)
+    doHyper2=1
+    ;;
+  hyper3)
+    doHyper3=1
+    ;;
+  hyper4)
+    doHyper4=1
+    ;;
+#  hyper5)
+#    doHyper5=1
+#    ;;
+  hyper6)
+    doHyper6=1
+    ;;
+  hyper7)
+    doHyper7=1
+    ;;
+  hyper8)
+    doHyper8=1
+    ;;
+#  hyper9)
+#    doHyper9=1
+#    ;;
+  hyper10)
+    doHyper10=1
+    ;;
+  hyper11)
+    doHyper11=1
+    ;;
+  hyper12)
+    doHyper12=1
+    ;;
+  hyper13)
+    doHyper13=1
+    ;;
+  hyper14)
+    doHyper14=1
+    ;;
+#  hyper24)
+#    doHyper24=1
+#    ;;
+  all-cc)
+#    doHyper5=1
+    doHyper6=1
+    doHyper7=1
+    doHyper8=1
+#    doHyper9=1
+    doHyper10=1
+    doHyper11=1
+    doHyper12=1
+    doHyper13=1
+    doHyper14=1
+#    doHyper24=1
+    ;;
+  all-pg)
+    doToad=1
+    doPg11=1
+    doPg03=1
+    ;;
+  all)
+    doToad=1
+    doPg03=1
+    doPg11=1
+    doHyper1=1
+    doHyper2=1
+    doHyper3=1
+    doHyper4=1
+#    doHyper5=1
+    doHyper6=1
+    doHyper7=1
+    doHyper8=1
+#    doHyper9=1
+    doHyper10=1
+    doHyper11=1
+    doHyper12=1
+    doHyper13=1
+    doHyper14=1
+#    doHyper24=1
+    ;;
+  esac
+done
+
+if [ "$doToad" = "1" ] ; then
+    geom=$size$xpos$yToad
+    echo "Starting xload on toad..."
+    ssh toad "/usr/X11R6/bin/xload $colorsToad -geom $geom $xloadArgs" &
+fi
+
+if [ "$doPg03" = "1" ] ; then
+    geom=$size$xpos$yPg03
+    echo "Starting xload on sjnpg03..."
+    ssh sjnpg03 "/usr/X11R6/bin/xload $colorsPg03 -geom $geom $xloadArgs" &
+fi
+
+if [ "$doPg11" = "1" ] ; then
+    geom=$size$xpos$yPg11
+    echo "Starting xload on sjnpg11..."
+    ssh sjnpg11 "/usr/X11R6/bin/xload $colorsPg11 -geom $geom $xloadArgs" &
+fi
+
+if [ "$doHyper1" = "1" ] ; then
+    geom=$size$xpos$yHyper1
+    echo "Starting xload on hyper1..."
+    ssh hyper1 "/usr/X11R6/bin/xload $colors1 -geom $geom $xloadArgs" &
+fi
+
+if [ "$doHyper2" = "1" ] ; then
+    geom=$size$xpos$yHyper2
+    echo "Starting xload on hyper2..."
+    ssh hyper2 "/usr/X11R6/bin/xload $colors2 -geom $geom $xloadArgs" &
+fi
+
+if [ "$doHyper3" = "1" ] ; then
+    geom=$size$xpos$yHyper3
+    echo "Starting xload on hyper3..."
+    ssh hyper3 "/usr/X11R6/bin/xload $colors3 -geom $geom $xloadArgs" &
+fi
+
+if [ "$doHyper4" = "1" ] ; then
+    geom=$size$xpos$yHyper4
+    echo "Starting xload on hyper4..."
+    ssh hyper4 "/usr/X11R6/bin/xload $colors4 -geom $geom $xloadArgs" &
+fi
+
+#if [ "$doHyper5" = "1" ] ; then
+#    geom=$size$xpos$yHyper5
+#    echo "Starting xload on hyper5..."
+#    ssh hyper5 "/usr/X11R6/bin/xload $colors5 -geom $geom $xloadArgs" &
+#fi
+
+if [ "$doHyper6" = "1" ] ; then
+    geom=$size$xpos$yHyper6
+    echo "Starting xload on hyper6..."
+    ssh hyper6 "/usr/X11R6/bin/xload $colors6 -geom $geom $xloadArgs" &
+fi
+
+if [ "$doHyper7" = "1" ] ; then
+    geom=$size$xpos$yHyper7
+    echo "Starting xload on hyper7..."
+    ssh hyper7 "/usr/X11R6/bin/xload $colors7 -geom $geom $xloadArgs" &
+fi
+
+if [ "$doHyper8" = "1" ] ; then
+    geom=$size$xpos$yHyper8
+    echo "Starting xload on hyper8..."
+    ssh hyper8 "/usr/X11R6/bin/xload $colors8 -geom $geom $xloadArgs" &
+fi
+
+#if [ "$doHyper9" = "1" ] ; then
+#    geom=$size$xpos$yHyper9
+#    echo "Starting xload on hyper9..."
+#    ssh hyper9 "/usr/X11R6/bin/xload $colors9 -geom $geom $xloadArgs" &
+#fi
+
+if [ "$doHyper10" = "1" ] ; then
+    geom=$size$xpos$yHyper10
+    echo "Starting xload on hyper10..."
+    ssh hyper10 "/usr/X11R6/bin/xload $colors10 -geom $geom $xloadArgs" &
+fi
+
+if [ "$doHyper11" = "1" ] ; then
+    geom=$size$xpos$yHyper11
+    echo "Starting xload on hyper11..."
+    ssh -X hyper11 "/usr/X11R6/bin/xload $colors11 -geom $geom $xloadArgs" &
+fi
+
+if [ "$doHyper12" = "1" ] ; then
+    geom=$size$xpos$yHyper12
+    echo "Starting xload on hyper12..."
+    ssh -X hyper12 "/usr/X11R6/bin/xload $colors12 -geom $geom $xloadArgs" &
+fi
+
+if [ "$doHyper13" = "1" ] ; then
+    geom=$size$xpos$yHyper13
+    echo "Starting xload on hyper13..."
+    ssh -X hyper13 "/usr/X11R6/bin/xload $colors13 -geom $geom $xloadArgs" &
+fi
+
+if [ "$doHyper14" = "1" ] ; then
+    geom=$size$xpos$yHyper14
+    echo "Starting xload on hyper14..."
+    ssh -X hyper14 "/usr/X11R6/bin/xload $colors14 -geom $geom $xloadArgs" &
+fi
+
+if [ "$doHyper24" = "1" ] ; then
+    geom=$size$xpos$yHyper24
+    echo "Starting xload on hyper24..."
+    ssh -X hyper24 "/usr/X11R6/bin/xload $colors24 -geom $geom $xloadArgs" &
+fi
+

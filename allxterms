@@ -1,0 +1,14 @@
+#!/bin/sh -f
+# Open a bunch of pretty xterms.
+
+xterm -fg white  -bg navy      -cr pink -fn 9x15 -sb -g 80x50+60+50 &
+xterm -fg white  -bg '#000040' -cr pink -fn 9x15 -sb -g 80x50+840+50 &
+xterm -fg yellow -bg '#000040' -cr red -fn 9x15 -sb -g 80x30+10+10 -iconic &
+xterm -fg yellow -bg black     -cr red -fn 9x15 -sb -g 80x30+10+300 -iconic &
+xterm -fg white  -bg black     -cr red -fn 9x15 -sb -g 80x40+425+470 &
+
+xterm -fg white  -bg '#501030' -cr green -fn 9x15 -sb -g 80x30+820+75 &
+xterm -fg white  -bg '#501030' -cr green -fn 9x15 -sb -g 80x30+820+575 &
+
+xclock -analog -update 1 -fg yellow -bg '#501030' -hd green -hl green -geom 150x150+1380+1020 &
+xload -update 3 -fg yellow -bg navy -geom 350x120+1020+1050 -highlight green &

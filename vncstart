@@ -1,0 +1,15 @@
+#!/bin/bash -f
+pushd ~ > /dev/null
+unset SSH_AUTH_SOCK
+unset SSH_TTY
+unset SSH_CLIENT
+unset SSH_CONNECTION
+unset DISPLAY
+#vncserver -alwaysshared -geometry 1024x768 -depth 8
+#vncserver -alwaysshared -geometry 1280x1024 -depth 8
+#vncserver -alwaysshared -geometry 1280x1024 -depth 16
+#vncserver -alwaysshared -geometry 1550x1200 -depth 8
+vncserver -alwaysshared -geometry 1600x1180 -depth 8
+#vncserver -alwaysshared -geometry 3200x1180 -depth 8
+popd > /dev/null
+

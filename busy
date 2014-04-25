@@ -1,0 +1,119 @@
+#!/bin/sh -f
+# Stupid script to make a noticable output forever.
+
+#######################################################################
+#
+#######################################################################
+do_output () 
+{
+    local reps=$1
+    local sleeptime=$2
+    local text=$3
+
+    while [ `expr $reps \> 0` != "0" ]
+    do
+	echo `date` "$text"
+	reps=`expr $reps - 1`
+    done
+    sleep $sleeptime
+}
+
+if [ $# -eq 0 ] ; then
+  sleeptime=666
+elif [ $# -eq 1 ] ; then
+  sleeptime=$1
+else
+  echo "Usage: `basename $0` [sleep time]"
+  exit 1
+fi
+
+echo "Using sleeping time of $sleeptime..."
+
+width=1
+while [ 1 ]
+do
+#  do_output $width $sleeptime "****                                         +"
+#  do_output $width $sleeptime "******                                       +"
+#  do_output $width $sleeptime "*********                                   +"
+#  do_output $width $sleeptime "************                               +"
+#  do_output $width $sleeptime "***************                           +"
+#  do_output $width $sleeptime "******************                      +"
+#  do_output $width $sleeptime "*********************                +"
+#  do_output $width $sleeptime "************************         +"
+#  do_output $width $sleeptime "***************************  X"
+#  do_output $width $sleeptime "************************         +"
+#  do_output $width $sleeptime "*********************                +"
+#  do_output $width $sleeptime "******************                      +"
+#  do_output $width $sleeptime "***************                           +"
+#  do_output $width $sleeptime "************                               +"
+#  do_output $width $sleeptime "*********                                   +"
+#  do_output $width $sleeptime "******                                       +"
+#  do_output $width $sleeptime "****                                         +"
+
+  do_output $width $sleeptime "**"                            
+  do_output $width $sleeptime "****"
+  do_output $width $sleeptime "******"
+  do_output $width $sleeptime "*********"
+  do_output $width $sleeptime "************"
+  do_output $width $sleeptime "***************"
+  do_output $width $sleeptime "******************"
+  do_output $width $sleeptime "*********************"
+  do_output $width $sleeptime "************************"
+  do_output $width $sleeptime "***************************"
+  do_output $width $sleeptime "************************"
+  do_output $width $sleeptime "*********************"
+  do_output $width $sleeptime "******************"
+  do_output $width $sleeptime "***************"
+  do_output $width $sleeptime "************"
+  do_output $width $sleeptime "*********"
+  do_output $width $sleeptime "******"
+  do_output $width $sleeptime "****"
+  do_output $width $sleeptime "**"
+  do_output $width $sleeptime "  **"
+  do_output $width $sleeptime "    **"
+  do_output $width $sleeptime "      **"
+  do_output $width $sleeptime "        **"
+  do_output $width $sleeptime "          **"
+  do_output $width $sleeptime "            **"
+  do_output $width $sleeptime "              **"
+  do_output $width $sleeptime "                **"
+  do_output $width $sleeptime "                  **"
+  do_output $width $sleeptime "                    **"
+  do_output $width $sleeptime "                      **"
+  do_output $width $sleeptime "                        **"
+  do_output $width $sleeptime "                          **"
+  do_output $width $sleeptime "                      ******"
+  do_output $width $sleeptime "                    ********"
+  do_output $width $sleeptime "                 ***********"
+  do_output $width $sleeptime "              **************"
+  do_output $width $sleeptime "           *****************"
+  do_output $width $sleeptime "        ********************"
+  do_output $width $sleeptime "     ***********************"
+  do_output $width $sleeptime "  **************************"
+  do_output $width $sleeptime "****************************"
+  do_output $width $sleeptime "  **************************"
+  do_output $width $sleeptime "     ***********************"
+  do_output $width $sleeptime "        ********************"
+  do_output $width $sleeptime "           *****************"
+  do_output $width $sleeptime "              **************"
+  do_output $width $sleeptime "                 ***********"
+  do_output $width $sleeptime "                    ********"
+  do_output $width $sleeptime "                      ******"
+  do_output $width $sleeptime "                          **"
+  do_output $width $sleeptime "                        **"
+  do_output $width $sleeptime "                      **"
+  do_output $width $sleeptime "                    **"
+  do_output $width $sleeptime "                  **"
+  do_output $width $sleeptime "                **"
+  do_output $width $sleeptime "              **"
+  do_output $width $sleeptime "            **"
+  do_output $width $sleeptime "          **"
+  do_output $width $sleeptime "        **"
+  do_output $width $sleeptime "      **"
+  do_output $width $sleeptime "    **"
+  do_output $width $sleeptime "  **"
+  do_output $width $sleeptime "**"
+done
+
+
+

@@ -1,0 +1,38 @@
+#!/bin/sh -f
+# tnarch -- calculate UNIX architecture
+
+TNARCH=unknown
+
+# Solaris man page for "arch" discourages its use, so use the recommended
+# uname -p.
+hardware="`uname -p`"
+if [ $? -eq 0 ]; then
+
+  # Linux wants uname -m, not uname -p.  Sigh.
+  if [ "$hardware" = "unknown" ]; then
+    hardware="`uname -m`"
+  fi
+
+  software="`uname -s`"
+  if [ $? -eq 0 ]; then
+
+    case $software in
+    SunOS) software=sol ;;
+    FreeBSD) software=freebsd ;;
+    Linux) software=linux ;;
+    *) ;;
+    esac
+    
+    case $hardware in
+    i?86|i86pc) hardware=x86 ;;
+    *) ;;
+    esac
+
+    TNARCH=${software}_${hardware}
+
+  fi  # uname -s succeeded
+
+fi  # uname -p succeeded
+
+echo $TNARCH
+exit 0
