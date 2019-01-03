@@ -1,4 +1,4 @@
-#!/bin/awk -f
+#!/usr/bin/awk -f
 # $Id: find_func.awk,v 1.1 2001/03/22 00:13:06 myke Exp $
 # Find and disply all function calls, even those spanning multiple lines.
 # Fixup the output so there is one call per line in the output.

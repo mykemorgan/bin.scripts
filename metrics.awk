@@ -1,4 +1,4 @@
-#!/bin/awk -f
+#!/usr/bin/awk -f
 # $Id: metrics.awk,v 1.4 2004/03/30 01:53:13 mimorgan Exp $
 # Simple script to count number of code lines and number of comment lines.
 # Attempts to count both C++ and C comments intelligently.

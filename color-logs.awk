@@ -1,4 +1,4 @@
-#!/bin/awk -f
+#!/usr/bin/awk -f
 # Tries to colorize log lines for console readability.
 # 
 
